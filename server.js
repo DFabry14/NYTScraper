@@ -17,10 +17,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({
-  defaultLayout: "main",
-  partialsDir: path.join(__dirname, "/views/layouts/partials")
-}));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(logger("dev"));
@@ -46,49 +43,33 @@ app.get("/scrape", function (req, res) {
       if (result.title && result.url && result.summary) {
         db.Article.create(result)
           .then(function (dbArticle) {
-            console.log(dbArticle);
+            console.log("INSIDE", dbArticle);
           })
           .catch(function (err) {
             return res.json(err);
           });
       }
-    })
-    res.send("Scrape Complete");
+    });
+    res.redirect("/")
   });
 });
 
-app.get("/articles", function (req, res) {
-  db.Article.find({})
-    .then(function (dbArticle) {
-      res.json(dbArticle);
-    })
-    .catch(function (err) {
-      res.json(err);
-    });
+app.get("/", function(req, res){
+  db.Article.find({}).then(function(dbArticle){
+    res.render("home", {articles: dbArticle})
+  })
 });
 
-app.get("/articles/:id", function (req, res) {
-  db.Article.findOne({ _id: req.params.id })
-    .populate("note")
-    .then(function (dbArticle) {
-      res.json(dbArticle);
-    })
-    .catch(function (err) {
-      res.json(err);
-    });
-});
+app.put("/articles/save/:id", function(req, res) {
+  db.Article.findOneAndUpdate({_id: req.params.id}, {"saved": true}).then(function(){
+    res.end();
+  })
+})
 
-app.post("/articles/:id", function (req, res) {
-  db.Note.create(req.body)
-    .then(function (dbNote) {
-      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
-    })
-    .then(function (dbArticle) {
-      res.json(dbArticle);
-    })
-    .catch(function (err) {
-      res.json(err);
-    });
+app.get("/saved", function (req, res) {
+  db.Article.find({saved: true}).then(function(dbArticle){
+    res.render("saved", {articles: dbArticle})
+  })
 });
 
 app.listen(PORT, function () {
