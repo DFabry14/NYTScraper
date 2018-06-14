@@ -8,7 +8,9 @@
                 </div>
                 <div class="panel-body">
                     <p> {{this.summary}}</p>
-                    <a href={{this.url}} target="_blank">{{this.url}}</a>
+                    <a href={{this.url}} target="_blank">Click for Story!</a>
+                    <button type="button" class="btn btn-success note" data-id={{this._id}}>Add a Note</button>
+                    <button type="button" class="btn btn-success remove" data-id={{this._id}}>Remove from Saved Articles</button>
                 </div>
             </div>
             {{/each}} {{else}}

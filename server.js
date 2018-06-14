@@ -64,13 +64,20 @@ app.put("/articles/save/:id", function(req, res) {
   db.Article.findOneAndUpdate({_id: req.params.id}, {"saved": true}).then(function(){
     res.end();
   })
-})
+});
+
+app.put("/articles/delete/:id", function(req, res) {
+  db.Article.findOneAndUpdate({_id: req.params.id}, {"saved": false}).then(function(){
+    res.end();
+  })
+});
 
 app.get("/saved", function (req, res) {
   db.Article.find({saved: true}).then(function(dbArticle){
     res.render("saved", {articles: dbArticle})
   })
 });
+
 
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");

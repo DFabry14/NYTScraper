@@ -17,3 +17,17 @@ $(".save").on("click", function() {
         window.location = "/"
     })
 });
+
+$(".remove").on("click", function() {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "PUT",
+        url: "/articles/delete/" + thisId
+    }).done(function(data) {
+        window.location = "/saved"
+    })
+});
+
+// $(".note").on("click", function() {
+
+// })
