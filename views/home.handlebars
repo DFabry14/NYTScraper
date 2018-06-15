@@ -4,15 +4,18 @@
             {{#each articles}}
             <div class="panel panel-primary">
                 <div class="panel-heading">
+                    <br>
                     <h4>{{this.title}}</h4>
                 </div>
                 <div class="panel-body">
                     <p> {{this.summary}}</p>
-                    <a href={{this.url}} target="_blank">Click for Story!</a>
+                    <a class="btn btn-primary" href={{this.url}} id="link" target="_blank">Click for Story!</a>
+                    <button type="button" id="linkSave" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
                     <br>
-                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+                    <br>
                 </div>
             </div>
+            <br>
             {{/each}}
         </div>
     </div>

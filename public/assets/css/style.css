@@ -1,0 +1,54 @@
+
+
+.jumbotron {
+    background-image: url("/assets/images/maxresdefault.jpg");
+}
+
+.display-4 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 80px;
+    color: #2E7CF6;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+}
+
+.lead {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 28px;
+}
+
+.panel {
+    background: white;
+    border: 2px;
+    border-color: black;
+    border-radius: 15px;
+}
+
+.panel-heading {
+    color: #2E7CF6;
+    background: white;
+    border-radius: 15px;
+}
+
+body {
+    background: grey;
+}
+
+p {
+    margin-left: 10px;
+}
+
+h4 {
+    margin-left: 10px;
+}
+
+.btn {
+    margin-left: 10px;
+}
