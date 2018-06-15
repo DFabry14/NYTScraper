@@ -24,9 +24,12 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nytscraper";
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+var databaseUri = "mongodb://localhost/nytscraper";
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  mongoose.connect(databaseUri);
+};
 
 app.get("/scrape", function (req, res) {
   axios.get("https://www.nytimes.com/").then(function (response) {
